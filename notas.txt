@@ -15,3 +15,4 @@ Dicas:
 /************************************************************************************/
 Notas:
 	- Já roda nativamente (java/iOS) na camada de aplicação. Life cycle, redux, regras de negoccio etc, continua sendo JS. Ou seja, o mesmo Component tem dois codigos/versões nativas.
+        - Key na list. Para o algoritimo de diff saber o sort da lista
