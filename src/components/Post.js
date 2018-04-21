@@ -60,6 +60,19 @@ export default class Post extends Component {
 
     }
 
+    exibeLegenda(foto) {
+        if (foto.comentario === '')
+            return
+        else {
+            return (
+                <Text>
+                    <Text style={styles.tituloComentario}>{foto.loginUsuario} </Text>
+                    <Text>{foto.comentario}</Text>
+                </Text>
+            )
+        }
+    }
+
     render() {
         const { foto } = this.state;
         return (
@@ -69,7 +82,7 @@ export default class Post extends Component {
                         source={{ uri: foto.urlPerfil }} />
                     <Text>{foto.loginUsuario}</Text>
                 </View>
-                <Image source={{uri: foto.urlFoto}} style={styles.fotoPrincipal}/>
+                <Image source={{ uri: foto.urlFoto }} style={styles.fotoPrincipal} />
 
                 <View style={styles.rodape}>
                     <TouchableOpacity onPress={this.like}>
@@ -77,6 +90,7 @@ export default class Post extends Component {
                             style={styles.botaoLike} />
                     </ TouchableOpacity>
                     {this.exibirLikes(foto.likers)}
+                    {this.exibeLegenda(foto)}
                 </View>
 
             </View >
@@ -109,6 +123,11 @@ const styles = StyleSheet.create({
         height: 40
     },
     curtidas: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: 10,
     },
+    tituloComentario: {
+        fontWeight: 'bold',
+        marginRight: 5
+    }
 });
