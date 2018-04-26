@@ -7,46 +7,48 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class Likes extends Component {
+export default class Like extends Component {
 
-    carregaIcone(likeada) {
-        return likeada ? require('../../resources/img/s2-checked.png') 
-            : require('../../resources/img/s2.png')
-    }
-    
-    exibeLikes(likers) {  
-        if(likers.length < 1)
-          return
-    
-        return <Text style={styles.curtidas}>
-          {likers.length} curtidas
-        </Text>
-    }
+  carregaIcone(likeada) {
+    return likeada ? require('../../resources/img/s2-checked.png')
+        : require('../../resources/img/s2.png')
+  }
 
-    render() {
-        const { foto, likeCallback } = this.props 
+  exibeLikes(likers) {
+    if(likers.length <= 0)
+      return;
 
-        return (
-            <View>
-                <TouchableOpacity onPress={likeCallback}>
-                    <Image style={styles.botaoDeLike}
-                    source={this.carregaIcone(foto.likeada)} />
-                </TouchableOpacity>
-                
-                {this.exibeLikes(foto.likers)}
-            </View>
-        );
-    }
+    return (
+      <Text style={styles.likes}>
+        {likers.length} {likers.length > 1 ? 'curtidas' : 'curtida'}
+      </Text>
+    );
+  }
+
+  render() {
+    const { foto } = this.props;
+    return (
+      <View>
+        <TouchableOpacity style={styles.botaoDeLike} onPress={() => this.props.likeCallback(foto.id)}>
+          <Image style={styles.icone}
+              source={this.carregaIcone(foto.likeada)} />
+        </TouchableOpacity>
+
+        {this.exibeLikes(foto.likers)}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    botaoDeLike: {
-        height: 40,
-        width: 40
-    },
-    curtidas: {
-        fontWeight: 'bold',
-        marginBottom: 10
-    },
-})
-
+  botaoDeLike: {
+    marginBottom: 10
+  },
+  likes: {
+    fontWeight: 'bold'
+  },
+  icone: {
+    height: 30,
+    width: 30
+  },
+});
